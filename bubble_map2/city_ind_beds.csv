@@ -1,0 +1,595 @@
+,cites,beds
+0,Andaman Islands,0.0
+1,Nicobar Islands,0.0
+2,Anantapur,0.0
+3,Chittoor,0.0
+4,Cuddapah,0.0
+5,East Godavari,0.0
+6,Guntur,0.0
+7,Krishna,0.0
+8,Kurnool,0.0
+9,Nellore,0.0
+10,Prakasam,0.0
+11,Srikakulam,0.0
+12,Vishakhapatnam,0.0
+13,Vizianagaram,0.0
+14,West Godavari,0.0
+15,Changlang,0.0
+16,East Kameng,0.0
+17,East Siang,0.0
+18,Kurung Kumey,0.0
+19,Lohit,0.0
+20,Lower Dibang Valley,0.0
+21,Lower Subansiri,0.0
+22,Papum Pare,0.0
+23,Tawang,0.0
+24,Tirap,0.0
+25,Upper Dibang Valley,0.0
+26,Upper Siang,0.0
+27,Upper Subansiri,0.0
+28,West Kameng,0.0
+29,West Siang,0.0
+30,Barpeta,0.0
+31,Bongaigaon,0.0
+32,Cachar,0.0
+33,Darrang,0.0
+34,Dhemaji,0.0
+35,Dhuburi,0.0
+36,Dibrugarh,0.0
+37,Goalpara,0.0
+38,Golaghat,0.0
+39,Hailakandi,0.0
+40,Jorhat,0.0
+41,Kamrup,0.0
+42,Karbi Anglong,0.0
+43,Karimganj,0.0
+44,Kokrajhar,0.0
+45,Lakhimpur,0.0
+46,Marigaon,0.0
+47,Nagaon,0.0
+48,Nalbari,0.0
+49,North Cachar Hills,0.0
+50,Sibsagar,0.0
+51,Sonitpur,0.0
+52,Tinsukia,0.0
+53,Araria,0.0
+54,Aurangabad,0.0
+55,Banka,0.0
+56,Begusarai,0.0
+57,Bhabua,0.0
+58,Bhagalpur,0.0
+59,Bhojpur,0.0
+60,Buxar,0.0
+61,Darbhanga,0.0
+62,Gaya,0.0
+63,Gopalganj,0.0
+64,Jamui,0.0
+65,Jehanabad,0.0
+66,Katihar,0.0
+67,Khagaria,0.0
+68,Kishanganj,0.0
+69,Lakhisarai,0.0
+70,Madhepura,0.0
+71,Madhubani,0.0
+72,Munger,0.0
+73,Muzaffarpur,0.0
+74,Nalanda,0.0
+75,Nawada,0.0
+76,Pashchim Champaran,0.0
+77,Patna,0.0
+78,Purba Champaran,0.0
+79,Purnia,0.0
+80,Rohtas,0.0
+81,Saharsa,0.0
+82,Samastipur,0.0
+83,Saran,0.0
+84,Sheikhpura,0.0
+85,Sheohar,0.0
+86,Sitamarhi,0.0
+87,Siwan,0.0
+88,Supaul,0.0
+89,Vaishali,0.0
+90,Chandigarh,0.0
+91,Bastar,0.0
+92,Bilaspur,0.0
+93,Dantewada,0.0
+94,Dhamtari,0.0
+95,Durg,0.0
+96,Janjgir-Champa,0.0
+97,Jashpur,0.0
+98,Kanker,0.0
+99,Kawardha,0.0
+100,Korba,0.0
+101,Koriya,0.0
+102,Mahasamund,0.0
+103,Raigarh,0.0
+104,Raipur,0.0
+105,Raj Nandgaon,0.0
+106,Surguja,0.0
+107,Dadra and Nagar Haveli,0.0
+108,Daman,0.0
+109,Junagadh,0.0
+110,Delhi,0.0
+111,North Goa,0.0
+112,South Goa,0.0
+113,Ahmadabad,0.0
+114,Amreli,0.0
+115,Anand,0.0
+116,Banas Kantha,0.0
+117,Bharuch,0.0
+118,Bhavnagar,0.0
+119,Dahod,0.0
+120,Gandhinagar,0.0
+121,Jamnagar,0.0
+122,Junagadh,0.0
+123,Kachchh,0.0
+124,Kheda,0.0
+125,Mahesana,0.0
+126,Narmada,0.0
+127,Navsari,0.0
+128,Panch Mahals,0.0
+129,Patan,0.0
+130,Porbandar,0.0
+131,Rajkot,0.0
+132,Sabar Kantha,0.0
+133,Surat,0.0
+134,Surendranagar,0.0
+135,The Dangs,0.0
+136,Vadodara,0.0
+137,Valsad,0.0
+138,Ambala,0.0
+139,Bhiwani,0.0
+140,Faridabad,0.0
+141,Fatehabad,0.0
+142,Gurgaon,0.0
+143,Hisar,0.0
+144,Jhajjar,0.0
+145,Jind,0.0
+146,Kaithal,0.0
+147,Karnal,0.0
+148,Kurukshetra,0.0
+149,Mahendragarh,0.0
+150,Panchkula,0.0
+151,Panipat,0.0
+152,Rewari,0.0
+153,Rohtak,0.0
+154,Sirsa,0.0
+155,Sonepat,0.0
+156,Yamuna Nagar,0.0
+157,Bilaspur,0.0
+158,Chamba,0.0
+159,Hamirpur,0.0
+160,Kangra,0.0
+161,Kinnaur,0.0
+162,Kullu,0.0
+163,Lahul and Spiti,0.0
+164,Mandi,0.0
+165,Shimla,0.0
+166,Sirmaur,0.0
+167,Solan,0.0
+168,Una,0.0
+169,Anantnag (Kashmir South),0.0
+170,Bagdam,0.0
+171,Baramula (Kashmir North),0.0
+172,Doda,0.0
+173,Jammu,0.0
+174,Kargil,0.0
+175,Kathua,0.0
+176,Kupwara (Muzaffarabad),0.0
+177,Ladakh (Leh),0.0
+178,Pulwama,0.0
+179,Punch,0.0
+180,Rajauri,0.0
+181,Srinagar,0.0
+182,Udhampur,0.0
+183,Bokaro,0.0
+184,Chatra,0.0
+185,Deoghar,0.0
+186,Dhanbad,0.0
+187,Dumka,0.0
+188,Garhwa,0.0
+189,Giridih,0.0
+190,Godda,0.0
+191,Gumla,0.0
+192,Hazaribag,0.0
+193,Jamtara,0.0
+194,Koderma,0.0
+195,Latehar,0.0
+196,Lohardaga,0.0
+197,Pakur,0.0
+198,Palamu,0.0
+199,Pashchim Singhbhum,0.0
+200,Purba Singhbhum,0.0
+201,Ranchi,0.0
+202,Sahibganj,0.0
+203,Saraikela Kharsawan,0.0
+204,Simdega,0.0
+205,Bagalkot,0.0
+206,Bangalore Rural,0.0
+207,Bangalore Urban,0.0
+208,Belgaum,0.0
+209,Bellary,0.0
+210,Bidar,0.0
+211,Bijapur,0.0
+212,Chamrajnagar,0.0
+213,Chikmagalur,0.0
+214,Chitradurga,0.0
+215,Dakshin Kannad,0.0
+216,Davanagere,0.0
+217,Dharwad,0.0
+218,Gadag,0.0
+219,Gulbarga,0.0
+220,Hassan,0.0
+221,Haveri,0.0
+222,Kodagu,0.0
+223,Kolar,0.0
+224,Koppal,0.0
+225,Mandya,0.0
+226,Mysore,0.0
+227,Raichur,0.0
+228,Shimoga,5.9
+229,Tumkur,0.0
+230,Udupi,0.0
+231,Uttar Kannand,0.0
+232,Alappuzha,0.0
+233,Ernakulam,0.0
+234,Idukki,0.0
+235,Kannur,0.0
+236,Kasaragod,0.0
+237,Kollam,0.0
+238,Kottayam,0.0
+239,Kozhikode,2.3
+240,Malappuram,0.0
+241,Palakkad,0.0
+242,Pattanamtitta,0.0
+243,Thiruvananthapuram,3.9
+244,Thrissur,0.0
+245,Wayanad,0.0
+246,Kavaratti,0.0
+247,Anuppur,0.0
+248,Ashoknagar,0.0
+249,Balaghat,0.0
+250,Barwani,0.0
+251,Betul,0.0
+252,Bhind,0.0
+253,Bhopal,0.0
+254,Burhanpur,0.0
+255,Chhatarpur,0.0
+256,Chhindwara,0.0
+257,Damoh,0.0
+258,Datia,0.0
+259,Dewas,0.0
+260,Dhar,0.0
+261,Dindori,0.0
+262,East Nimar,0.0
+263,Guna,0.0
+264,Gwalior,0.0
+265,Harda,0.0
+266,Hoshangabad,0.0
+267,Indore,0.0
+268,Jabalpur,0.0
+269,Jhabua,0.0
+270,Katni,0.0
+271,Mandla,0.0
+272,Mandsaur,0.0
+273,Morena,0.0
+274,Narsinghpur,0.0
+275,Neemuch,0.0
+276,Panna,0.0
+277,Raisen,0.0
+278,Rajgarh,0.0
+279,Ratlam,0.0
+280,Rewa,0.0
+281,Sagar,0.0
+282,Satna,0.0
+283,Sehore,0.0
+284,Seoni,0.0
+285,Shahdol,0.0
+286,Shajapur,0.0
+287,Sheopur,0.0
+288,Shivpuri,0.0
+289,Sidhi,0.0
+290,Tikamgarh,0.0
+291,Ujjain,0.0
+292,Umaria,0.0
+293,Vidisha,0.0
+294,West Nimar,0.0
+295,Ahmednagar,0.0
+296,Akola,0.0
+297,Amravati,0.0
+298,Aurangabad,0.0
+299,Bhandara,0.0
+300,Bid,0.0
+301,Buldana,0.0
+302,Chandrapur,0.0
+303,Dhule,0.0
+304,Garhchiroli,0.0
+305,Gondiya,0.0
+306,Greater Bombay,0.0
+307,Hingoli,0.0
+308,Jalgaon,0.0
+309,Jalna,0.0
+310,Kolhapur,0.0
+311,Latur,0.0
+312,Nagpur,0.0
+313,Nanded,0.0
+314,Nandurbar,0.0
+315,Nashik,0.0
+316,Osmanabad,0.0
+317,Parbhani,0.0
+318,Pune,0.0
+319,Raigarh,0.0
+320,Ratnagiri,0.0
+321,Sangli,0.0
+322,Satara,0.0
+323,Sindhudurg,0.0
+324,Solapur,0.0
+325,Thane,0.0
+326,Wardha,0.0
+327,Washim,0.0
+328,Yavatmal,0.0
+329,Bishnupur,0.0
+330,Chandel,0.0
+331,Churachandpur,0.0
+332,East Imphal,0.0
+333,Senapati,0.0
+334,Tamenglong,0.0
+335,Thoubal,0.0
+336,Ukhrul,0.0
+337,West Imphal,0.0
+338,East Garo Hills,0.0
+339,East Khasi Hills,0.0
+340,Jaintia Hills,0.0
+341,Ri-Bhoi,0.0
+342,South Garo Hills,0.0
+343,West Garo Hills,0.0
+344,West Khasi Hills,0.0
+345,Aizawl,0.0
+346,Champhai,0.0
+347,Kolasib,0.0
+348,Lawngtlai,0.0
+349,Lunglei,0.0
+350,Mamit,0.0
+351,Saiha,0.0
+352,Serchhip,0.0
+353,Dimapur,0.0
+354,Kohima,0.0
+355,Mokokchung,0.0
+356,Mon,0.0
+357,Phek,0.0
+358,Tuensang,0.0
+359,Wokha,0.0
+360,Zunheboto,0.0
+361,Angul,0.0
+362,Baleshwar,0.0
+363,Baragarh,0.0
+364,Bhadrak,0.0
+365,Bolangir,0.0
+366,Boudh,0.0
+367,Cuttack,0.0
+368,Deogarh,0.0
+369,Dhenkanal,0.0
+370,Gajapati,0.0
+371,Ganjam,0.0
+372,Jagatsinghpur,0.0
+373,Jajpur,0.0
+374,Jharsuguda,0.0
+375,Kalahandi,0.0
+376,Kandhamal,0.0
+377,Kendrapara,0.0
+378,Keonjhar,0.0
+379,Khordha,0.0
+380,Koraput,0.0
+381,Malkangiri,0.0
+382,Mayurbhanj,0.0
+383,Nabarangpur,0.0
+384,Nayagarh,0.0
+385,Nuapada,0.0
+386,Puri,0.0
+387,Rayagada,0.0
+388,Sambalpur,0.0
+389,Sonepur,0.0
+390,Sundargarh,0.0
+391,Karaikal,0.0
+392,Mahe,0.0
+393,Puducherry,0.0
+394,Yanam,0.0
+395,Amritsar,0.0
+396,Bathinda,0.0
+397,Faridkot,0.0
+398,Fatehgarh Sahib,0.0
+399,Firozpur,0.0
+400,Gurdaspur,0.0
+401,Hoshiarpur,0.0
+402,Jalandhar,0.0
+403,Kapurthala,0.0
+404,Ludhiana,0.0
+405,Mansa,0.0
+406,Moga,0.0
+407,Muktsar,0.0
+408,Nawan Shehar,0.0
+409,Patiala,0.0
+410,Rupnagar,0.0
+411,Sangrur,0.0
+412,Ajmer,0.0
+413,Alwar,0.0
+414,Banswara,0.0
+415,Baran,0.0
+416,Barmer,0.0
+417,Bharatpur,0.0
+418,Bhilwara,0.0
+419,Bikaner,0.0
+420,Bundi,0.0
+421,Chittaurgarh,0.0
+422,Churu,0.0
+423,Dausa,0.0
+424,Dhaulpur,0.0
+425,Dungarpur,0.0
+426,Ganganagar,0.0
+427,Hanumangarh,0.0
+428,Jaipur,0.0
+429,Jaisalmer,0.0
+430,Jalor,0.0
+431,Jhalawar,0.0
+432,Jhunjhunun,0.0
+433,Jodhpur,0.0
+434,Karauli,0.0
+435,Kota,0.0
+436,Nagaur,0.0
+437,Pali,0.0
+438,Rajsamand,0.0
+439,Sawai Madhopur,0.0
+440,Sikar,0.0
+441,Sirohi,0.0
+442,Tonk,0.0
+443,Udaipur,0.0
+444,East,0.0
+445,North Sikkim,0.0
+446,South Sikkim,0.0
+447,West Sikkim,0.0
+448,Ariyalur,0.0
+449,Chennai,2.6
+450,Coimbatore,0.0
+451,Cuddalore,0.0
+452,Dharmapuri,0.0
+453,Dindigul,0.0
+454,Erode,0.0
+455,Kancheepuram,0.0
+456,Kanniyakumari,0.0
+457,Karur,0.0
+458,Madurai,0.0
+459,Nagapattinam,0.0
+460,Namakkal,0.0
+461,Nilgiris,0.0
+462,Perambalur,0.0
+463,Pudukkottai,0.0
+464,Ramanathapuram,0.0
+465,Salem,0.0
+466,Sivaganga,0.0
+467,Thanjavur,0.0
+468,Theni,0.0
+469,Thiruvallur,0.0
+470,Thiruvarur,0.0
+471,Thoothukudi,0.0
+472,Tiruchchirappalli,0.0
+473,Tirunelveli Kattabo,0.0
+474,Tiruvannamalai,0.0
+475,Vellore,0.0
+476,Villupuram,0.0
+477,Virudhunagar,0.0
+478,Adilabad,0.0
+479,Hyderabad,0.0
+480,Karimnagar,0.0
+481,Khammam,0.0
+482,Mahbubnagar,0.0
+483,Medak,0.0
+484,Nalgonda,0.0
+485,Nizamabad,0.0
+486,Rangareddi,0.0
+487,Warangal,0.0
+488,Dhalai,0.0
+489,North Tripura,0.0
+490,South Tripura,0.0
+491,West Tripura,0.0
+492,Agra,0.0
+493,Aligarh,0.0
+494,Allahabad,0.0
+495,Ambedkar Nagar,0.0
+496,Auraiya,0.0
+497,Azamgarh,0.0
+498,Badaun,0.0
+499,Baghpat,0.0
+500,Bahraich,0.0
+501,Ballia,0.0
+502,Balrampur,0.0
+503,Banda,0.0
+504,Bara Banki,0.0
+505,Bareilly,0.0
+506,Basti,0.0
+507,Bijnor,0.0
+508,Bulandshahr,0.0
+509,Chandauli,0.0
+510,Chitrakoot,0.0
+511,Deoria,0.0
+512,Etah,0.0
+513,Etawah,0.0
+514,Faizabad,0.0
+515,Farrukhabad,0.0
+516,Fatehpur,0.0
+517,Firozabad,0.0
+518,Gautam Buddha Nagar,0.0
+519,Ghaziabad,0.0
+520,Ghazipur,0.0
+521,Gonda,0.0
+522,Gorakhpur,0.0
+523,Hamirpur,0.0
+524,Hardoi,0.0
+525,Hathras,0.0
+526,Jalaun,0.0
+527,Jaunpur,0.0
+528,Jhansi,0.0
+529,Jyotiba Phule Nagar,0.0
+530,Kannauj,0.0
+531,Kanpur Dehat,0.0
+532,Kanpur,0.0
+533,Kaushambi,0.0
+534,Kushinagar,0.0
+535,Lakhimpur Kheri,0.0
+536,Lalitpur,0.0
+537,Lucknow,0.0
+538,Maharajganj,0.0
+539,Mahoba,0.0
+540,Mainpuri,0.0
+541,Mathura,0.0
+542,Mau,0.0
+543,Meerut,0.0
+544,Mirzapur,0.0
+545,Moradabad,0.0
+546,Muzaffarnagar,0.0
+547,Pilibhit,0.0
+548,Pratapgarh,0.0
+549,Rae Bareli,0.0
+550,Rampur,0.0
+551,Saharanpur,0.0
+552,Sant Kabir Nagar,0.0
+553,Sant Ravi Das Nagar,0.0
+554,Shahjahanpur,0.0
+555,Shravasti,0.0
+556,Siddharth Nagar,0.0
+557,Sitapur,0.0
+558,Sonbhadra,0.0
+559,Sultanpur,0.0
+560,Unnao,0.0
+561,Varanasi,0.0
+562,Almora,0.0
+563,Bageshwar,0.0
+564,Chamoli,0.0
+565,Champawat,0.0
+566,Dehra Dun,0.0
+567,Haridwar,0.0
+568,Naini Tal,0.0
+569,Pauri Garhwal,0.0
+570,Pithoragarh,0.0
+571,Rudra Prayag,0.0
+572,Tehri Garhwal,0.0
+573,Udham Singh Nagar,0.0
+574,Uttarkashi,0.0
+575,Bankura,0.0
+576,Barddhaman,0.0
+577,Birbhum,0.0
+578,Dakshin Dinajpur,0.0
+579,Darjiling,0.0
+580,East Midnapore,0.0
+581,Haora,0.0
+582,Hugli,0.0
+583,Jalpaiguri,0.0
+584,Kochbihar,0.0
+585,Kolkata,0.0
+586,Maldah,0.0
+587,Murshidabad,0.0
+588,Nadia,0.0
+589,North 24 Parganas,0.0
+590,Puruliya,0.0
+591,South 24 Parganas,0.0
+592,Uttar Dinajpur,0.0
+593,West Midnapore,0.0

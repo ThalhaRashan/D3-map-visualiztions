@@ -1,0 +1,161 @@
+<meta charset="utf-8">
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.13.0/d3-legend.js"></script>
+<style>
+    #legend{
+        position: absolute;
+        left: 300px;
+        top: 75px;
+        width: 200px;
+        height: 100px;
+        background-color: #c6d1c3;
+        /*stroke: #36454f;*/
+        /*stroke-width: 4px;*/
+    }
+
+    .headers{
+        text-align: center;
+        font-family: "Calibri";
+        color: #36454f;
+        font-size: 19px;
+        font-weight: bold;
+    }
+</style>
+<svg id="legend">
+    <rect width="200" height="260" style="fill: #c6d1c3;stroke-width:3;stroke:rgb(0,0,0)" />
+    <foreignObject height="100%" width="100%" x="0" y="-0.5vh">
+        <p class="headers">Hospitals locations <br>
+            <font size='3'> Number of hospitals at the location</font> <br>
+        </p>
+    </foreignObject>
+</svg>
+<script>
+
+    var width = 960,
+        height = 700;
+
+    var path = d3.geo.path();
+
+    const  hospital_lat_long = [];
+
+
+    var svg = d3.select("body").append("svg")
+        .attr('id', 'map')
+        .attr("width", width)
+        .attr("height", height)
+        .attr('overflow', 'visible')
+        .style('background', 'white');
+
+
+
+    // THIS IS THE INPUT FOR THE TOPO JSON DATA
+    d3.json("NPl_adm1.json", function(error, topology) {
+        // d3.json("output.json", function(error, topology) {
+
+        if (error) throw error;
+
+        // LOOK IN INSPECT FOR JSON DATA AND INSIDE THAT NAVIGATE TO OBJECTS AND FIND THE NAME OF
+        // THE NEXT PATH CURRENTLY 'pak_prow'
+        console.log('JSON DATA', topology)
+
+        var featureCollection = topojson.feature(topology, topology.objects.NPL_adm1);
+        var bounds = d3.geo.bounds(featureCollection);
+
+        var centerX = d3.sum(bounds, function(d) {return d[0];}) / 2,
+            centerY = d3.sum(bounds, function(d) {return d[1];}) / 2;
+
+        var projection = d3.geo.mercator()
+            .scale(3500)
+            .center([centerX, centerY])
+            // USE THIS TRANSLATE FOR POSIONING THE MAP
+            .translate([width / 2, height / 2 + 20]);
+
+        path.projection(projection);
+
+
+        topology.objects.NPL_adm1.geometries = topology.objects.NPL_adm1.geometries.filter(function(d){
+            return d ;
+        });
+
+
+        draw(topology)
+        // hospital_location(projection, 25, [[67.0042, 24.8176], [67.0455, 24.9247], [67.0101, 24.859], [67.0429, 24.8524], [67.0429, 24.8524], [67.1272, 24.9143], [67.0297, 24.92], [67.1118, 24.8169]]); 8
+        // hospital_location(projection, 24, [[74.2975, 31.4845], [74.2804, 31.4797], [74.3973, 31.4842], [74.351, 31.4545], [74.3283, 31.5119], [74.3324, 31.541]]); 6
+        // hospital_location(projection, 23, [[71.436, 33.994], [71.5668, 34.0107], [71.4388, 33.9955], [71.4358, 33.9924], [71.486, 33.9966]]); 5
+
+        // THIS IS THE FUNCTION FOR THE LOCATION PINS YOU HAVE TO ENTER IT [LATITUDE, LONGITUDE] (IF IT DOES'NT WORK TRY THE OTHER ORDER) 
+        // THE LEGEND IS
+        // hospital_location(projection, 44, [[67.1842, 24.8176]]);// 7-9
+        // hospital_location(projection, 32, [[71.436, 33.994], [74.2975, 31.4845]]);  // 4-6
+        hospital_location(projection, 20, [[85.3031, 27.6623], [85.3297, 27.7354]]);  // 1-3
+
+
+    });
+
+    function draw(topology_r){
+
+        svg.append("g")
+            .attr("class", "state-boundary")
+            .selectAll("path")
+            .data(topojson.feature(topology_r, topology_r.objects.NPL_adm1).features)
+            .enter().append("path")
+            .style("fill", '#c6d1c3')
+            .style("stroke", "#57636b")
+            .style("stroke-width", "0.5px")
+            .attr("d", path);
+
+
+    }
+
+    function hospital_location(projection, size, data){
+        d3.select('#map').append('g')
+            .selectAll("circle")
+            .data(data).enter()
+            .append("image")
+            .attr("xlink:href", 'blue_location_pin.png')
+            .attr('opacity', 1)
+            .attr("x", function (d) { return projection(d)[0] - size/2; })
+            .attr("y", function (d) { return projection(d)[1] - size/2; })
+            .on("mouseover", function(d) {
+                    console.log(d);
+                })
+            .attr("width", size)
+            .attr("height", size);
+    }
+
+    function legend(){
+        const legend = d3.select('#legend')
+        const position = [20, 52, 96]
+
+        legend.selectAll("circle")
+            .data([20])
+            .enter()
+            .append("image")
+            .attr("xlink:href", 'blue_location_pin.png')
+            .attr('x', function(d){return 75 - d / 2})
+            .attr("y", function(d,i){ return ((position[i] + 5) + (i * 10) + 85 - (d / 2))}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("width", function(d){return d})
+            .attr("height", function(d){return d})
+            .attr('class', 'legend_c');
+
+        // CHANGE LEGEND KEYS HERE
+        const keys = [{"keys": "Hospital", 'val': 20}];
+
+        legend.selectAll('text')
+            .data(keys)
+            .enter()
+            .append('text')
+            .attr("y", function(d, i){return ((position[i] + 5) + (i * 10) + 91)}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr('x', 110)
+            .attr('text-anchor', 'middle')
+            .text(function(d, i){return d.keys})
+            .style('font-size', 14)
+            .style('display', 'inline')
+            .style('font-family', 'Calibri')
+            .attr('class', 'legend_t');
+    }
+
+    legend()
+</script>

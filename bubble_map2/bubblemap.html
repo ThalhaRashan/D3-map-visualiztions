@@ -1,0 +1,232 @@
+<meta charset="utf-8">
+<style>
+
+    .bubble {
+        fill-opacity: 0.7;
+        stroke: #fff;
+        fill: #263a86;
+        stroke-width: 0.5px;
+    }
+
+    .legend_c{
+        fill-opacity: 0.9;
+        stroke: #fff;
+        fill: #263a86;
+        stroke-width: 0.5px;
+    }
+
+    .state {
+        fill: #ddd;
+    }
+
+    .state-boundary {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 0.8px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+    }
+
+    #legend{
+        position: absolute;
+        left: 20px;
+        top: 55px;
+        width: 200px;
+        height: 230px;
+        background-color: rgb(253, 253, 253);
+    }
+
+    .headers{
+        text-align: center;
+        font-family: "Calibri";
+        color: #36454f;
+        font-size: 19px;
+        font-weight: bold;
+    }
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.13.0/d3-legend.js"></script>
+<svg id="legend">
+    <foreignObject height="100%" width="100%" x="0" y="-0.5vh">
+        <p class="headers">India <br>
+            <font size='3'> ICU beds density map</font> <br>
+            <font size='2'> <b> ICU beds per (100,000) population</b> (City level)</font>
+        </p>
+        <!-- <div class="loss">
+            <p>Average lenght of stay <br>&#8226; Planned: <span id="los_planned"></span> days <br>&#8226;
+                Unplanned: <span id="los_unplanned"></span> days</p>
+        </div> -->
+    </foreignObject>
+</svg>
+<script>
+
+    var width = 960,
+        height = 500;
+
+    var path = d3.geo.path();
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height + 200)
+        .attr('overflow', 'visible')
+        .style('background', 'grey');
+
+    var max_domain = 1
+
+    var min_domain = 0
+
+    var radius = d3.scale.linear()
+        .domain([0, 6])
+        .range([0, 15]);
+
+    d3.json("IND_adm2.json", function(error, topology) {
+        // d3.json("output.json", function(error, topology) {
+
+        if (error) throw error;
+
+
+        var featureCollection = topojson.feature(topology, topology.objects.IND_adm2);
+        var bounds = d3.geo.bounds(featureCollection);
+
+        var centerX = d3.sum(bounds, function(d) {return d[0];}) / 2,
+            centerY = d3.sum(bounds, function(d) {return d[1];}) / 2;
+
+        var projection = d3.geo.mercator()
+            .scale(1000)
+            .center([centerX, centerY])
+            .translate([width * 0.5, height * 0.7 ]);
+
+        path.projection(projection);
+
+        svg.append("path")
+            .datum(topojson.feature(topology, topology.objects.IND_adm2))
+            .attr('fill', 'grey')
+            .attr("class", "state")
+            // .style('position', 'absolute')
+            // .style('top', (height/2) + 20)
+            // .style('left', '-2000px')
+            .attr("d", path);
+
+
+        d3.csv("city_ind_beds.csv", function(error, csv) {
+            csv.forEach(function (d, j) {
+                topology.objects.IND_adm2.geometries.forEach(function(e, i) {
+                    if (d.cites === e.properties.NAME_2){
+                        e.properties.NL_NAME_3 = d.beds
+                    }
+                })
+            })
+
+            console.log('done')
+            state_border()
+
+
+        });
+
+
+
+        function state_border(){
+
+        d3.json('IND_adm1.json', function(error, topology_r){
+
+            if (error) throw error;
+            console.log('x', topology_r);
+
+            svg.append("path")
+                .attr("class", "state-boundary")
+                .attr('fill','none')
+                .attr("d", path(topojson.mesh(topology_r, topology_r.objects.IND_adm1)));
+
+            // svg.append("path")
+            //     .datum(topojson.merge(topology, topology.objects.IND_adm2.geometries.filter(function(d) { return selected.has(d.id); })))
+            //     .attr("class", "state selected")
+            //     .attr("stroke","black")
+            //     .attr("d", path);
+
+            bub()
+        })}
+
+
+        function bub(){
+            wait(1)
+
+        svg.append("g")
+            .attr("class", "bubble")
+            .selectAll("circle")
+            .data(topojson.feature(topology, topology.objects.IND_adm2).features.sort(function(a, b){return parseFloat(b.properties.beds_per) - parseFloat(a.properties.beds_per)}))
+            .enter().append("circle")
+            .attr("transform", function(d) {return "translate(" + path.centroid(d) + ")"; })
+            .attr("r", function(d) {return radius(parseFloat(d.properties.NL_NAME_3)); });
+
+        }
+        // console.log(data)
+        //
+        // svg.append("g")
+        //     .attr("class", "bubble")
+        //     .selectAll("circle")
+        //     .data(data.
+        //         .sort(function(a, b) {console.log(d); return b.geometries.properties.beds - a.geometries.properties.beds; }))
+        //     .enter().append("circle")
+        //     .attr("transform", function(d) {console.log(d); return "translate(" + path.centroid(d) + ")"; })
+        //     .attr("r", function(d) { return radius(d.properties.beds); });
+
+    var legend = d3.select('#legend')
+
+    legend.selectAll("circle")
+            .data([1.5, 3.0, 4.5, 6.0])
+            .enter()
+            .append("circle")
+            .attr('cx', 75)
+            .attr("cy", function(d,i){ return (radius(d)+5) + (i * 25) + 105}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("r", radius)
+                .attr('class', 'legend_c')
+
+    var keys = ['1.5', '3.0', '4.5', '6.0']
+
+    legend.selectAll('text')
+            .data(keys)
+            .enter()
+            .append('text')
+            .attr("y", function(d, i){return (radius(parseFloat(d)) + 5) + (i * 25) + 105}) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr('x', 110)
+            // .attr("x", function(d,i){console.log(d); return (width - 450) + (radius(d)+5) + (i * 25)}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr('text-anchor', 'middle')
+            .text(function(d, i){return d})
+            .style('font-size', 14)
+            .style('display', 'inline')
+            .style('font-family', 'Calibri')
+            .attr('class', 'legend_t');
+
+
+
+        // var legend = svg.append("g")
+        //     .attr("class", "legend")
+        //     .attr("transform", "translate(" + (width - 350) + "," + (height - 20) + ")")
+        //     .selectAll("g")
+        //     .data([0.1, 0.6, 1])
+        //     .enter().append("g");
+        //
+        // legend.append("circle")
+        //     .attr("cy", function(d) { return -radius(d); })
+        //     .attr("r", radius);
+        //
+        // legend.append("text")
+        //     .attr("y", function(d) { return -2 * radius(d); })
+        //     .attr("dy", "1.3em")
+        //     .text(d3.format(".1s"));
+
+    });
+
+function wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+        end = new Date().getTime();
+    }
+}
+
+
+</script>

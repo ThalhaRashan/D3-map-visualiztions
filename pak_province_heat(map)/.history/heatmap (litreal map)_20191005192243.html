@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--The code is modified from : https://gist.github.com/phil-pedruco/10447085-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>geojson csv join</title>
+
+    <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/topojson.v1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.8.0/d3-legend.min.js"></script>
+
+</head>
+
+<body>
+<p id="report"></p>
+<div id="map"></div>
+<svg id="legend">
+    <foreignObject height="100%" width="100%" x="0" y="-0.5vh">
+        <p class="headers">ICU admissions <br>
+        <font size='3'> ICU beds dencity map</font> <br><br>
+        <font size='1'> Beds per (10 000) population</font>
+    </p>
+        <!-- <div class="loss">
+            <p>Average lenght of stay <br>&#8226; Planned: <span id="los_planned"></span> days <br>&#8226;
+                Unplanned: <span id="los_unplanned"></span> days</p>
+        </div> -->
+    </foreignObject>
+</svg>
+</body>
+<script type="text/javascript">
+    var h = 450,
+            w = 960;
+
+    // set-up unit projection and path
+    var projection = d3.geo.mercator()
+            .scale(1)
+            .translate([0, 0]);
+
+    var path = d3.geo.path()
+            .projection(projection);
+
+    // set-up svg canvas
+    var svg = d3.select("#map").append("svg")
+            .style('background-color','grey')
+            .attr("height", h)
+            .attr("width", w);
+
+    var legend_svg = d3.select('#legend')
+    var color = d3.scale.linear()
+            .range(["white", "#002147"]);
+    var showValue= "gdp";
+    var record=[];
+
+    var linear = d3.scale.linear()
+            .range(["white", "#002147"]);
+
+    function addRecord(d){
+        d[showValue]=+d[showValue];
+        console.log(d)
+        var obj = {key: d.countries, value: d[showValue]};
+        record.push(obj);
+        return d;
+
+    }
+    d3.csv("per_beds.csv", addRecord, function(error,data){
+        color.domain(d3.extent(data, function(d){
+            return d[showValue];
+        }));
+        linear.domain(d3.extent(data, function(d){
+            return d[showValue];
+        }));
+    });
+
+
+    //https://github.com/johan/world.geo.json
+    d3.json("pak_prov.json", function(error, data) {
+
+        d3.csv("idCountry.csv", function(error, csv) {
+            var world = data.features;
+
+            console.log(world)
+
+            csv.forEach(function(d, i) {
+                world.forEach(function(e, j) {
+                    if (d.id === e.properties.NAME_1) {
+                        e.name = d.name
+                    }
+                })
+            })
+
+            // calculate bounds, scale and transform
+            var b = path.bounds(data),
+                    s = .95 / Math.max((b[1][0] - b[0][0]) / w, (b[1][1] - b[0][1]) / h),
+                    t = [(w - s * (b[1][0] + b[0][0])) / 2, (h - s * (b[1][1] + b[0][1])) / 2];
+
+            projection.scale(s)
+                    .translate(t);
+
+            svg.selectAll("path")
+                    .data(world).enter()
+                    .append("path")
+                    .style("fill", getColor)
+                    .style("stroke", "grey")
+                    .style("stroke-width", "1px")
+                    .attr("d", path)
+                    // .on("mouseover", function(d, i) {
+                    //     reporter(d);
+                    // })
+                    ;
+        });
+        legend_svg
+            .append("g")
+            .attr("class", "legendLinear")
+            .attr("transform", "translate(50,130)");
+
+        var legendLinear = d3.legend.color()
+                .shapeWidth(60)
+                .scale(linear);
+
+        legend_svg.select(".legendLinear")
+                .call(legendLinear);
+
+        function reporter(x) {
+            console.log(x);
+            var value = "Not known";
+            record.forEach(function(d){
+                if(x.name === d.key){
+                    value = d.value;
+                    return;
+                }
+            });
+            d3.select("#report").text(function() {
+                return x.name+": "+value;
+            });
+
+        }
+
+        function getColor(data){
+            var value=-1;
+            record.forEach(function(d){
+                if(data.name === d.key){
+                    value = d.value;
+                    return;
+                }
+            });
+            if(value==-1){
+                return "none";
+            }
+            return color(value);
+        }
+
+    })
+</script>
+
+<style>
+#legend{
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    width: 200px;
+    height: 240px;
+    background-color: beige;
+}
+
+.headers{
+    text-align: center;
+    font-family: "Calibri";
+    color: #36454f;
+    font-size: 19px;
+}
+</style>
+
+</html>

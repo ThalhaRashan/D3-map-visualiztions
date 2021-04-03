@@ -1,0 +1,142 @@
+x,cites,beds
+0,Chennai,1.0
+1,Kozhikode,0.6
+2,Thiruvananthapuram,0.6
+3,Shimoga,0.6
+4,Muzaffarabad,0.6
+5,Neelum,0.6
+6,Poonch,0.5
+7,Sudhnati,0.9
+8,Awaran,0.6
+9,Disputed Area 1,1.0
+10,Disputed Area 2,0.0
+11,Kalat,0.7
+12,Kharan,0.6
+13,Khuzdar,0.1
+14,Lasbela,0.8
+15,Mastung,0.1
+16,Gwadar,0.1
+17,Kech,0.7
+18,Panjgur,0.1
+19,Bolan,0.5
+20,Jafarabad,0.6
+21,Jhal Magsi,0.5
+22,Nasirabad,0.2
+23,Chagai,0.6
+24,Pishin,0.2
+25,Qilla Abdullah,1.0
+26,Quetta,0.1
+27,Dera Bugti,0.1
+28,Kholu,0.2
+29,Sibi,0.9
+30,Ziarat,0.5
+31,Barkhan,0.3
+32,Loralai,0.7
+33,Musakhel,0.2
+34,Qilla Saifullah,0.0
+35,Zhob,0.7
+36,Bajaur,0.5
+37,Khyber,0.8
+38,Kurram,0.5
+39,Largha Shirani,0.7
+40,Mohmand,0.2
+41,N. Waziristan,0.2
+42,Orakzai,0.9
+43,S. Waziristan,0.9
+44,Islamabad,0.2
+45,Bannu,0.2
+46,Lakki Marwat,0.1
+47,Dera Ismail Khan,0.4
+48,Tank,0.5
+49,Adam Khel,0.2
+50,Bhittani,0.6
+51,Abbottabad,0.3
+52,Battagram,0.9
+53,Haripur,0.8
+54,Kohistan,0.1
+55,Mansehra,0.8
+56,Hangu,0.8
+57,Karak,1.0
+58,Kohat,1.0
+59,Chitral,0.2
+60,Dir,0.5
+61,Malakand P.A.,0.7
+62,Shangla,0.0
+63,Swat,0.7
+64,Buner,0.3
+65,Mardan,0.3
+66,Swabi,0.5
+67,Charsadda,0.3
+68,Nowshera,0.1
+69,Peshawar,0.4
+70,Chilas,0.8
+71,Gilgit,0.3
+72,Gilgit (Tribal Territory),0.5
+73,Kargil,0.4
+74,Kupwara (Gilgit Wazarat),0.1
+75,Ladakh (Leh),0.7
+76,Bahawalnagar,0.6
+77,Bahawalpur,0.5
+78,Rahimyar Khan,0.2
+79,Dera Ghazi Kha,0.2
+80,Layyah,0.1
+81,Muzaffargarh,0.8
+82,Rajan Pur,0.5
+83,Faisalabad,0.1
+84,Jhang,0.6
+85,Toba Tek Singh,1.0
+86,Gujarat,0.6
+87,Gujranwala 1,0.3
+88,Gujranwala 2,0.4
+89,Gujrat,0.7
+90,Hafizabad,0.7
+91,Narowal 1,0.7
+92,Narowal 2,0.3
+93,Sialkot,0.5
+94,Kasur,0.6
+95,Lahore,0.8
+96,Nankana Sahib,0.2
+97,Okara,0.1
+98,Okara 1,0.7
+99,Sheikhupura,0.8
+100,Khanewal,0.9
+101,Lodhran,0.4
+102,Multan,0.1
+103,Pakpattan,1.0
+104,Sahiwal,0.8
+105,Vehari,0.5
+106,Attok,0.1
+107,Chakwal,0.5
+108,Jhelum,0.6
+109,Rawalpindi,0.3
+110,Bhakkar,0.9
+111,Khushab,0.6
+112,Mianwali,0.8
+113,Sargodha,0.0
+114,Badin,0.6
+115,Dadu,0.6
+116,Hyderabad,0.1
+117,Jamshoro,0.1
+118,Matiari,0.4
+119,Tando Allahyar,0.4
+120,Tando M. Khan,0.6
+121,Thatta,0.3
+122,Karachi Central,0.1
+123,Karachi East,0.7
+124,Karachi South,0.8
+125,Karachi west,0.9
+126,Malir,0.6
+127,Jakobabad,0.8
+128,Kashmore,0.4
+129,Larkana,0.7
+130,Shikarpur,0.8
+131,Mirphurkhas,0.9
+132,Mithi,0.6
+133,Sanghar,0.0
+134,Umerkot,0.9
+135,Rann of Kutch,0.3
+136,Ghotki,0.6
+137,Khairpur,0.2
+138,Naushahro Firoz,0.3
+139,Nawab Shah,0.0
+140,Sukkur,0.5

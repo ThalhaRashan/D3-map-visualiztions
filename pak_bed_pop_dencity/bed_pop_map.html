@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<!--The code is modified from : https://gist.github.com/phil-pedruco/10447085-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>geojson csv join</title>
+
+    <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/topojson.v1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.8.0/d3-legend.min.js"></script>
+
+</head>
+
+<style>
+    #legend{
+        position: absolute;
+        left: 16px;
+        top: 10px;
+        width: 200px;
+        height: 240px;
+        background-color: rgb(253, 253, 253);
+    }
+
+    #legend_pop{
+        position: absolute;
+        left: 15px;
+        top: 465px;
+        width: 200px;
+        height: 240px;
+        background-color: rgb(253, 253, 253);
+    }
+
+    
+    .headers{
+        text-align: center;
+        font-family: "Calibri";
+        color: #36454f;
+        font-size: 19px;
+        font-weight: bold;
+    }
+
+    /* #map, #map_pop{
+        background-color: grey;
+    } */
+
+    </style>
+
+<body>
+
+<div id="map"></div>
+<svg id="legend">
+    <foreignObject height="100%" width="100%" x="0" y="-0.5vh">
+        <p class="headers">
+        <font size='3'> <b> ICU beds per (100,000) population</b> (regions level)</font>
+    </p>
+    <p style="margin-top: 120px; text-align: center;"><img src="black_white_loc_pin_1.png" height="25" style="opacity: 0.5; vertical-align: bottom;"> <span>Hospital</span> </p>
+
+    </foreignObject>
+</svg>
+
+<div id="map_pop"></div>
+<svg id="legend_pop">
+    <foreignObject height="100%" width="100%" x="0" y="-0.5vh">
+        <p class="headers">
+            <font size='3'> <b> People per square kilometer</b> <br> (regions level)</font>
+        </p>
+        <!-- <div class="loss">
+            <p>Average lenght of stay <br>&#8226; Planned: <span id="los_planned"></span> days <br>&#8226;
+                Unplanned: <span id="los_unplanned"></span> days</p>
+        </div> -->
+        <p style="margin-top: 120px; text-align: center;"><img src="black_white_loc_pin_1.png" height="25" style="opacity: 0.5; vertical-align: bottom;"> <span>Hospital</span> </p>
+    </foreignObject>
+</svg>
+</body>
+
+
+<script type="text/javascript">
+
+    function hospital_location_pop(projection, size, data){
+        console.log('xxxx')
+        d3.select('#map_pop_svg').append('g')
+            .selectAll("circle")
+            .data(data).enter()
+            .append("image")
+            .attr("xlink:href", 'black_white_loc_pin_1.png')
+            .attr('opacity', 0.3)
+            .attr("x", function (d) { return projection(d)[0] - size/2; })
+            .attr("y", function (d) { return projection(d)[1] - size; })
+            .on("mouseover", function(d) {
+                    console.log(d);
+                })
+            .attr("width", size)
+            .attr("height", size);
+        }
+
+
+
+    function hospital_location(projection, size, data){
+        console.log('xxxx')
+        d3.select('#map_svg').append('g')
+            .selectAll("circle")
+            .data(data).enter()
+            .append("image")
+            .attr("xlink:href", 'black_white_loc_pin_1.png')
+            .attr('opacity', 0.3)
+            .attr("x", function (d) { return projection(d)[0] - size/2; })
+            .attr("y", function (d) { return projection(d)[1] - size; })
+            .on("mouseover", function(d) {
+                    console.log(d);
+                })
+            .attr("width", size)
+            .attr("height", size);
+
+        // d3.select('#map_svg').append('g')
+        //     svg.selectAll(".pin")
+        //     .data(data)
+        //     .enter().append("circle", ".pin")
+        //     .attr("r", 7)
+        //     .attr('opacity', 0.3)
+        //     .attr('fill', 'red')
+        //     .attr("transform", function(d) {
+        //         return "translate(" + projection(d) + ")";
+        //     });
+
+    }
+
+
+    function pop_chart(){
+        var h = 450,
+            w = 960;
+    
+        // set-up unit projection and path
+        var projection = d3.geo.mercator()
+            .scale(1)
+            .translate([0, 0]);
+    
+        var path = d3.geo.path()
+            .projection(projection);
+    
+        // set-up svg canvas
+        var svg = d3.select("#map_pop").append("svg").attr('id', 'map_pop_svg')
+            .style('background-color','grey')
+            .attr("height", h)
+            .attr("width", w);
+    
+        var legend_svg = d3.select('#legend_pop')
+        var color = d3.scale.linear()
+            .range(["#a4d4f5", "#002147"]);
+    
+        var showValue= "gdp";
+        var record=[];
+    
+        var linear = d3.scale.linear()
+            .range(["#a4d4f5", "#002147"]);
+    
+        console.log(linear)
+    
+    
+        function addRecord(d){
+            d[showValue]=+d[showValue];
+            console.log(d)
+            var obj = {key: d.countries, value: d[showValue]};
+            record.push(obj);
+            return d;
+    
+        }
+        d3.csv("pop_den.csv", addRecord, function(error,data){
+            color.domain(d3.extent(data, function(d){
+                return d[showValue];
+            }));
+            linear.domain(d3.extent(data, function(d){
+                return d[showValue];
+            }));
+        });
+    
+    
+        //https://github.com/johan/world.geo.json
+        d3.json("pak_prov.geojson", function(error, data) {
+    
+            d3.csv("idCountry.csv", function(error, csv) {
+                console.log(data)
+                var world = data.features;
+    
+                console.log(world)
+    
+                csv.forEach(function(d, i) {
+                    world.forEach(function(e, j) {
+                        if (d.id === e.properties.nam) {
+                            e.name = d.name
+                        }
+                    })
+                })
+    
+                // calculate bounds, scale and transform
+                var b = path.bounds(data),
+                    s = .95 / Math.max((b[1][0] - b[0][0]) / w, (b[1][1] - b[0][1]) / h),
+                    t = [(w - s * (b[1][0] + b[0][0])) / 2, (h - s * (b[1][1] + b[0][1])) / 2];
+    
+                projection.scale(s)
+                    .translate(t);
+
+                svg.selectAll("path")
+                    .data(world).enter()
+                    .append("path")
+                    .style("fill", getColor)
+                    .style("stroke", "#202427")
+                    .style("stroke-width", "1px")
+                    .attr("d", path)
+
+                hospital_location_pop(projection, 25, [[67.029652, 24.920089], [67.074651, 24.891986], [74.212457, 31.444284], [73.080998, 31.448964], [74.403991, 31.273909], [73.236408, 34.204017], [74.079716, 32.598927], [73.158894, 31.455366], [71.680805, 29.388896], [74.187647, 31.387813], [73.071575, 33.627518], [74.431505, 31.138196], [66.973885, 30.191024], [71.555682, 30.242188], [74.37854, 31.327977], [67.143306, 24.823665], [71.720007, 29.412279], [67.010055, 24.858956], [67.13229, 24.814996], [70.638728, 30.051175], [74.191434, 32.16954], [71.4717, 33.613468], [70.956643, 30.971174], [73.053795, 33.612903], [73.102766, 30.684022], [72.664462, 32.080292], [67.127188, 24.914318], [74.280348, 31.479559], [67.140522, 24.946466], [73.086563, 31.423084], [72.736152, 31.323716], [66.953843, 30.192699], [74.328108, 31.535671], [74.394769, 31.49968], [73.094077, 33.556567], [72.916818, 31.759121], [73.082744, 33.721162], [68.872206, 27.701075], [74.502765, 31.590006], [74.285117, 31.63813], [74.343921, 31.482928], [73.172437, 33.644732], [73.466012, 34.372981], [74.328182, 31.512004], [71.449632, 33.992259], [73.059161, 33.589235], [73.057435, 33.640753], [71.565159, 30.221853], [73.06866, 31.418226], [74.504335, 32.458267], [73.017169, 33.649182], [73.034192, 33.619527], [68.37992, 25.434554], [74.337665, 31.475579], [74.297328, 31.484479], [73.263042, 34.160547], [67.042839, 24.852523], [73.03179, 33.677616], [73.072816, 33.718066], [67.027587, 24.866065], [67.080342, 24.933515], [66.995118, 24.854026], [71.486017, 33.996495], [67.043648, 24.850489], [73.072773, 33.717995], [71.500567, 34.003082], [71.566545, 34.010862], [74.306895, 31.587393], [74.397286, 31.484683], [67.068218, 24.891001], [67.068218, 24.890962], [68.367742, 25.400341], [72.031044, 34.153576], [74.314222, 31.571556], [67.063526, 24.881092], [67.146415, 24.945423], [71.521781, 34.007572], [71.450438, 30.191952], [67.039609, 24.853559], [71.462235, 34.007596], [74.39727, 31.484551], [71.441137, 30.203283], [71.435826, 33.993938], [73.053328, 33.703101], [72.784742, 33.749961], [73.015991, 33.653163], [67.097247, 24.935015], [68.375476, 26.27277], [74.33608, 31.538086], [67.012753, 24.943866], [72.973211, 33.624454], [73.121995, 33.632457], [73.081581, 33.615549], [71.436069, 33.992549], [74.262064, 31.497118], [74.198469, 31.335681], [68.168848, 27.402035], [67.01116, 24.86026], [74.312092, 31.481133], [74.332304, 31.540967], [70.317597, 28.417648], [74.379894, 31.575084], [74.308586, 31.508153], [74.308015, 31.509429], [73.067058, 33.675109], [67.010055, 24.859034], [74.320652, 31.554168], [74.852315, 32.116439], [74.351222, 31.538129], [67.063489, 24.918864], [67.065885, 24.923102], [67.030427, 24.867982], [67.111736, 24.816964], [73.076638, 31.498295], [67.007688, 24.81705], [67.045499, 24.924381]]);
+
+                svg.selectAll("text")
+                    .data(world)
+                    .enter()
+                    .append("svg:text")
+                    .text(function(d){
+                    console.log('check text pos', d)
+                    if(d.properties.nam == 'Northern Areas'){
+                        d.properties.nam = 'Gilgit-Baltistan'
+                    }else if(d.properties.nam == 'N.W.F.P.'){
+                        d.properties.nam = 'Khyber Pakhtunkhwa'
+                    }else if(d.properties.nam == 'Sind'){
+                        d.properties.nam = 'Sindh'
+                    }
+                    return d.properties.nam;
+                    })
+                    .attr("x", function(d){
+                        if(d.properties.nam == 'Khyber Pakhtunkhwa'){
+                            return path.centroid(d)[0] - 20
+                        }
+                        return path.centroid(d)[0];
+                    })
+                    .attr("y", function(d){
+                        if(d.properties.nam == 'Khyber Pakhtunkhwa'){
+                            return path.centroid(d)[1] + 20
+                        }
+                        return  path.centroid(d)[1];
+                    })
+                    .attr("text-anchor","middle")
+                    .attr('font-size','9pt')
+                    .attr('fill', 'white');
+    
+            });
+            legend_svg
+                .append("g")
+                .attr("class", "legendLinear")
+                .attr("transform", "translate(50,80)");
+            var legendLinear = d3.legend.color()
+                .shapeWidth(60)
+                .scale(linear);
+    
+            console.log(legendLinear)
+            console.log(linear)
+    
+            legend_svg.select(".legendLinear")
+                .call(legendLinear);
+
+            
+    
+    
+            function reporter(x) {
+                console.log(x);
+                var value = "Not known";
+                record.forEach(function(d){
+                    if(x.name === d.key){
+                        value = d.value;
+                        return;
+                    }
+                });
+                d3.select("#report").text(function() {
+                    return x.name+": "+value;
+                });
+    
+            }
+    
+            function getColor(data){
+                var value=-1;
+                record.forEach(function(d){
+                    console.log(d)
+                    console.log(data.properties.nam)
+                    if(data.properties.nam === d.key){
+                        value = d.value;
+                        return;
+                    }
+                });
+                if(value==-1){
+                    return "none";
+                }
+                if(isNaN(value)){
+                    return '#C0C0C0'
+                }
+                console.log(value)
+                return color(value);
+            }
+    
+        })
+    }
+    </script>
+
+
+<script type="text/javascript">
+    var h = 450,
+            w = 960;
+
+    // set-up unit projection and path
+    var projection = d3.geo.mercator()
+            .scale(1)
+            .translate([0, 0]);
+
+    
+    var path = d3.geo.path()
+            .projection(projection);
+
+    // set-up svg canvas
+    var svg = d3.select("#map").append("svg").attr('id', 'map_svg')
+            .style('background-color','grey')
+            .attr("height", h)
+            .attr("width", w);
+
+    var legend_svg = d3.select('#legend')
+    var color = d3.scale.linear()
+            .range(["#a4d4f5", "#002147"]);
+
+    var showValue= "gdp";
+    var record=[];
+
+    var linear = d3.scale.linear()
+            .range(["#a4d4f5", "#002147"]);
+
+            console.log(linear)
+
+
+    function addRecord(d){
+        d[showValue]=+d[showValue];
+        console.log(d)
+        var obj = {key: d.countries, value: d[showValue]};
+        record.push(obj);
+        return d;
+
+    }
+    d3.csv("per_beds.csv", addRecord, function(error,data){
+        color.domain(d3.extent(data, function(d){
+            return d[showValue];
+        }));
+        linear.domain(d3.extent(data, function(d){
+            return d[showValue];
+        }));
+    });
+
+
+    d3.json("pak_prov.geojson", function(error, data) {
+
+        d3.csv("idCountry.csv", function(error, csv) {
+            console.log(data)
+            var world = data.features;
+
+            console.log(world)
+
+            csv.forEach(function(d, i) {
+                world.forEach(function(e, j) {
+                    if (d.id === e.properties.nam) {
+                        e.name = d.name
+                    }
+                })
+            })
+
+            // calculate bounds, scale and transform
+            var b = path.bounds(data),
+            s = .95 / Math.max((b[1][0] - b[0][0]) / w, (b[1][1] - b[0][1]) / h),
+            t = [(w - s * (b[1][0] + b[0][0])) / 2, (h - s * (b[1][1] + b[0][1])) / 2];
+
+            console.log('pro  1', projection)
+
+            projection = projection.scale(s)
+                    .translate(t);
+
+
+
+            svg.selectAll("path")
+                    .data(world).enter()
+                    .append("path")
+                    .style("fill", getColor)
+                    .style("stroke", "#202427")
+                    .style("stroke-width", "1px")
+                    .attr("d", path) 
+
+            hospital_location(projection, 25, [[67.029652, 24.920089], [67.074651, 24.891986], [74.212457, 31.444284], [73.080998, 31.448964], [74.403991, 31.273909], [73.236408, 34.204017], [74.079716, 32.598927], [73.158894, 31.455366], [71.680805, 29.388896], [74.187647, 31.387813], [73.071575, 33.627518], [74.431505, 31.138196], [66.973885, 30.191024], [71.555682, 30.242188], [74.37854, 31.327977], [67.143306, 24.823665], [71.720007, 29.412279], [67.010055, 24.858956], [67.13229, 24.814996], [70.638728, 30.051175], [74.191434, 32.16954], [71.4717, 33.613468], [70.956643, 30.971174], [73.053795, 33.612903], [73.102766, 30.684022], [72.664462, 32.080292], [67.127188, 24.914318], [74.280348, 31.479559], [67.140522, 24.946466], [73.086563, 31.423084], [72.736152, 31.323716], [66.953843, 30.192699], [74.328108, 31.535671], [74.394769, 31.49968], [73.094077, 33.556567], [72.916818, 31.759121], [73.082744, 33.721162], [68.872206, 27.701075], [74.502765, 31.590006], [74.285117, 31.63813], [74.343921, 31.482928], [73.172437, 33.644732], [73.466012, 34.372981], [74.328182, 31.512004], [71.449632, 33.992259], [73.059161, 33.589235], [73.057435, 33.640753], [71.565159, 30.221853], [73.06866, 31.418226], [74.504335, 32.458267], [73.017169, 33.649182], [73.034192, 33.619527], [68.37992, 25.434554], [74.337665, 31.475579], [74.297328, 31.484479], [73.263042, 34.160547], [67.042839, 24.852523], [73.03179, 33.677616], [73.072816, 33.718066], [67.027587, 24.866065], [67.080342, 24.933515], [66.995118, 24.854026], [71.486017, 33.996495], [67.043648, 24.850489], [73.072773, 33.717995], [71.500567, 34.003082], [71.566545, 34.010862], [74.306895, 31.587393], [74.397286, 31.484683], [67.068218, 24.891001], [67.068218, 24.890962], [68.367742, 25.400341], [72.031044, 34.153576], [74.314222, 31.571556], [67.063526, 24.881092], [67.146415, 24.945423], [71.521781, 34.007572], [71.450438, 30.191952], [67.039609, 24.853559], [71.462235, 34.007596], [74.39727, 31.484551], [71.441137, 30.203283], [71.435826, 33.993938], [73.053328, 33.703101], [72.784742, 33.749961], [73.015991, 33.653163], [67.097247, 24.935015], [68.375476, 26.27277], [74.33608, 31.538086], [67.012753, 24.943866], [72.973211, 33.624454], [73.121995, 33.632457], [73.081581, 33.615549], [71.436069, 33.992549], [74.262064, 31.497118], [74.198469, 31.335681], [68.168848, 27.402035], [67.01116, 24.86026], [74.312092, 31.481133], [74.332304, 31.540967], [70.317597, 28.417648], [74.379894, 31.575084], [74.308586, 31.508153], [74.308015, 31.509429], [73.067058, 33.675109], [67.010055, 24.859034], [74.320652, 31.554168], [74.852315, 32.116439], [74.351222, 31.538129], [67.063489, 24.918864], [67.065885, 24.923102], [67.030427, 24.867982], [67.111736, 24.816964], [73.076638, 31.498295], [67.007688, 24.81705], [67.045499, 24.924381]]);
+
+            svg.selectAll("text")
+                .data(world)
+                .enter()
+                .append("svg:text")
+                .text(function(d){
+                    console.log('check text pos', d)
+                    if(d.properties.nam == 'Northern Areas'){
+                        d.properties.nam = 'Gilgit-Baltistan'
+                    }else if(d.properties.nam == 'N.W.F.P.'){
+                        d.properties.nam = 'Khyber Pakhtunkhwa'
+                    }else if(d.properties.nam == 'Sind'){
+                        d.properties.nam = 'Sindh'
+                    }
+                    return d.properties.nam;
+                })
+                .attr("x", function(d){
+                    if(d.properties.nam == 'Khyber Pakhtunkhwa'){
+                        return path.centroid(d)[0] - 20
+                    }
+                    return path.centroid(d)[0];
+                })
+                .attr("y", function(d){
+                    if(d.properties.nam == 'Khyber Pakhtunkhwa'){
+                        return path.centroid(d)[1] + 20
+                    }
+                    return  path.centroid(d)[1];
+                })
+                .attr("text-anchor","middle")
+                .attr('font-size','9pt')
+                .attr('fill', 'white');
+
+            
+        });
+        legend_svg
+            .append("g")
+            .attr("class", "legendLinear")
+            .attr("transform", "translate(50,80)");
+
+
+        var legendLinear = d3.legend.color()
+                .shapeWidth(60)
+                .scale(linear);
+
+        console.log(legendLinear)
+        console.log(linear)
+
+        legend_svg.select(".legendLinear")
+                .call(legendLinear);
+
+
+        function reporter(x) {
+            console.log(x);
+            var value = "Not known";
+            record.forEach(function(d){
+                if(x.name === d.key){
+                    value = d.value;
+                    return;
+                }
+            });
+            d3.select("#report").text(function() {
+                return x.name+": "+value;
+            });
+
+        }
+
+        function getColor(data){
+            var value=-1;
+            record.forEach(function(d){
+                console.log(d)
+                console.log(data.properties.nam)
+                if(data.properties.nam === d.key){
+                    value = d.value;
+                    return;
+                }
+            });
+            if(value==-1){
+                return "none";
+            }
+            if(isNaN(value)){
+                return '#C0C0C0'
+            }
+            console.log(value)
+            return color(value);
+        }
+
+    })
+    pop_chart()
+</script>
+
+
+
+
+
+</html>
